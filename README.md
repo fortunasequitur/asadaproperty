@@ -33,4 +33,15 @@ bun run dev                  # frontend
 
 Build production: `bun run build` (output ke `dist/`).
 
+## Deploy ke Vercel
+
+1. Import repo ini di Vercel (framework: **Vite**, build `npm run build`, output `dist`. Biasanya terdeteksi otomatis).
+2. Tambah Environment Variable: `VITE_CONVEX_URL` = `https://cheery-lark-913.convex.cloud` (backend production yang sama dengan web live, jadi lead dari Vercel masuk ke database yang sama).
+3. Deploy. Tiap push ke `main` bakal auto-deploy ulang.
+
+Catatan:
+- Halaman `/admin` **tidak bisa login** di domain Vercel (login pakai Viktor). Buka lead di https://villa-puncak-annisa-devtool-2.viktor.space/admin.
+- Kalau pakai domain sendiri, ganti `siteUrl` di `src/config/site.ts` biar canonical & preview share (og:url) ikut domain itu.
+- `convex/_generated/` sengaja ikut di-commit supaya build jalan tanpa `convex dev`.
+
 > Catatan: project ini dibuat sebagai Viktor Space. Login admin ("Sign in with Viktor") dan akses edge memakai platform Viktor; kalau di-host di tempat lain, bagian auth di `convex/auth.ts` & `src/admin/` perlu disesuaikan. Detail template ada di `README.viktor-template.md`.

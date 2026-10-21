@@ -10,7 +10,7 @@ dist/
 .env.*.local
 
 # Convex generated files
-convex/_generated/
+# convex/_generated/ is committed in this repo so npm/Vercel builds work without `convex dev`
 
 # IDE
 .vscode/
