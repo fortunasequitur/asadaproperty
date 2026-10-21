@@ -20,6 +20,12 @@ export default defineConfig(({ mode }) => {
   if (note) console.log(note);
   // Vite gives variables already in process.env priority over .env files.
   Object.assign(process.env, overrides);
+  // Hosts outside Viktor (e.g. Vercel) may build without VITE_CONVEX_URL;
+  // fall back to the production Convex backend (public URL, not a secret).
+  if (!env.VITE_CONVEX_URL && !process.env.VITE_CONVEX_URL) {
+    process.env.VITE_CONVEX_URL = site.convexUrlFallback;
+    console.log(`VITE_CONVEX_URL not set; using ${site.convexUrlFallback}`);
+  }
 
   return {
     plugins: [

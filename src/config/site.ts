@@ -9,6 +9,7 @@
 export const site: Record<
   | "name"
   | "siteUrl"
+  | "convexUrlFallback"
   | "tagline"
   | "city"
   | "developerName"
@@ -30,6 +31,11 @@ export const site: Record<
    * og:url, canonical & JSON-LD di index.html (token __SITE_URL__).
    */
   siteUrl: "https://villa-puncak-annisa-devtool-2.viktor.space",
+  /**
+   * Backend Convex produksi. Dipakai otomatis kalau env VITE_CONVEX_URL
+   * tidak di-set saat build (mis. hosting di Vercel). URL publik, bukan rahasia.
+   */
+  convexUrlFallback: "https://cheery-lark-913.convex.cloud",
   tagline: "Rumah Mewah Nuansa Villa di Kawasan Kota Malang",
   city: "Kota Malang",
 
