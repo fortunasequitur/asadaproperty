@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- No <link rel="manifest"> here: the pwa-install module adds it (and
+         ships the manifest) when a Space is meant to install as an app. See
+         "Install as an app" in README.md. -->
+    <!-- Title-bar color of the installed app; ThemeProvider keeps it in step
+         with the active theme's --background. -->
+    <meta name="theme-color" content="oklch(0.22 0.05 152)" />
+    <!-- No maximum-scale: pinch-zoom must stay enabled (WCAG 1.4.4). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Every page load opens a WebSocket to the Convex deployment before
+         anything renders (auth restore, then data). Warming the TCP+TLS
+         connection while the bundle downloads removes that handshake from
+         the critical path. Vite substitutes %VITE_CONVEX_URL% at build time. -->
+    <link rel="preconnect" href="%VITE_CONVEX_URL%" />
+    <link rel="preload" as="image" type="image/webp" href="/img/hero-m-600.webp" imagesrcset="/img/hero-m-420.webp 420w, /img/hero-m-600.webp 600w" imagesizes="100vw" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="/img/hero-1171.webp" imagesrcset="/img/hero-768.webp 768w, /img/hero-1171.webp 1171w" imagesizes="100vw" media="(min-width: 768px)" fetchpriority="high" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Villa Puncak Annisa — Rumah Mewah Nuansa Villa di Kota Malang" />
+    <meta property="og:description" content="Type 40/66 &amp; Type 75. Promo Free PPN, Free Biaya KPR &amp; Balik Nama, Cashback 50jt, interior bisa request. Isi form untuk info harga &amp; jadwal survey." />
+    <meta property="og:image" content="/img/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Villa Puncak Annisa — Rumah Mewah Nuansa Villa di Kota Malang</title>
+    <meta name="description" content="Rumah mewah nuansa villa di Kota Malang — Type 40/66, promo Free PPN, Free Biaya KPR &amp; Balik Nama, Cashback 50jt. KPR BRI, BSI &amp; BSN. Daftar sekarang untuk info harga &amp; survey lokasi." />
+  </head>
+  <body style="background:oklch(0.97 0.018 90)">
+    <!-- Static header + hero, rendered at build time (scripts/preload-landing.ts).
+         Shown before JS runs; removed once React mounts the real hero. -->
+    <div id="vpa-shell" inert style="position:absolute;top:0;left:0;right:0;z-index:1"><!--vpa-shell--></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

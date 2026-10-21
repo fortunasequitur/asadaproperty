@@ -1,0 +1,288 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Metric-matched fallbacks: system fonts resized to the web fonts' width and
+   vertical metrics so the swap to the web fonts does not move the layout. */
+@font-face {
+  font-family: "VPA Serif Times";
+  src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif");
+  size-adjust: 95.7%;
+  ascent-override: 96.5%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "VPA Serif Noto";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  size-adjust: 81.1%;
+  ascent-override: 113.9%;
+  descent-override: 35.4%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "VPA Sans Arial";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  size-adjust: 103%;
+  ascent-override: 100.8%;
+  descent-override: 21.6%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "VPA Sans Roboto";
+  src: local("Roboto"), local("Noto Sans");
+  size-adjust: 97.3%;
+  ascent-override: 106.7%;
+  descent-override: 22.8%;
+  line-gap-override: 0%;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest-soft: var(--forest-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-ink: var(--ink);
+  --color-wa: var(--wa);
+}
+
+:root {
+  /* Typography — the neutral baseline uses system stacks. Give every app its
+     own voice: `bun add @fontsource-variable/<family>`, import it in
+     src/main.tsx, then point these tokens at the loaded families.
+     See DESIGN.md. */
+  --font-body:
+    "Plus Jakarta Sans Variable", "VPA Sans Arial", "VPA Sans Roboto",
+    ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  --font-display:
+    "Cormorant Garamond Variable", "VPA Serif Times", "VPA Serif Noto",
+    Georgia, serif;
+
+  /* Villa Puncak Annisa palette — derived from the flyer: deep forest green,
+     champagne gold, warm cream. */
+  --forest: oklch(0.33 0.07 150);
+  --forest-deep: oklch(0.22 0.05 152);
+  --forest-soft: oklch(0.45 0.08 148);
+  --gold: oklch(0.78 0.11 85);
+  --gold-soft: oklch(0.89 0.06 88);
+  --gold-deep: oklch(0.52 0.09 75);
+  --cream: oklch(0.97 0.018 90);
+  --cream-deep: oklch(0.93 0.03 88);
+  --ink: oklch(0.24 0.03 150);
+  --wa: oklch(0.52 0.13 150);
+
+
+  --primary: var(--forest);
+  --primary-foreground: var(--cream);
+
+  /* emerald-700: the 600 shade fails WCAG AA (4.5:1) as text on white */
+  --success: var(--color-emerald-700);
+  --success-foreground: var(--color-white);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-950);
+  --info: var(--color-cyan-500);
+  --info-foreground: var(--color-white);
+
+  --chart-1: var(--color-teal-500);
+  --chart-2: var(--color-orange-500);
+  --chart-3: var(--color-cyan-500);
+  --chart-4: var(--color-rose-500);
+  --chart-5: var(--color-lime-500);
+
+  --radius: 0.625rem;
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 260);
+  --secondary: oklch(0.96 0.005 260);
+  --secondary-foreground: oklch(0.3 0.01 260);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.45 0.015 260);
+  --accent: oklch(0.96 0.005 260);
+  --accent-foreground: oklch(0.15 0.01 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.92 0.005 260);
+  --input: oklch(0.92 0.005 260);
+  --ring: var(--gold-deep);
+}
+
+.dark {
+  --primary: var(--color-white);
+  --primary-foreground: var(--color-slate-900);
+
+  --success: var(--color-emerald-400);
+  --success-foreground: var(--color-emerald-950);
+  --warning: var(--color-amber-400);
+  --warning-foreground: var(--color-amber-950);
+  --info: var(--color-cyan-400);
+  --info-foreground: var(--color-cyan-950);
+
+  --chart-1: var(--color-teal-400);
+  --chart-2: var(--color-orange-400);
+  --chart-3: var(--color-cyan-400);
+  --chart-4: var(--color-rose-400);
+  --chart-5: var(--color-lime-400);
+
+  --background: oklch(0.12 0.01 260);
+  --foreground: oklch(0.95 0.005 260);
+  --card: oklch(0.16 0.01 260);
+  --card-foreground: oklch(0.95 0.005 260);
+  --popover: oklch(0.16 0.01 260);
+  --popover-foreground: oklch(0.95 0.005 260);
+  --secondary: oklch(0.22 0.01 260);
+  --secondary-foreground: oklch(0.9 0.005 260);
+  --muted: oklch(0.22 0.01 260);
+  --muted-foreground: oklch(0.6 0.01 260);
+  --accent: oklch(0.22 0.01 260);
+  --accent-foreground: oklch(0.95 0.005 260);
+  /* Light enough for AA as text on the dark background; dark foreground for
+     use as a button surface. */
+  --destructive: oklch(0.68 0.19 22);
+  --destructive-foreground: oklch(0.14 0.01 260);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.9 0.01 260);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-variant-numeric: lining-nums;
+  }
+  /* Separate stacking context so Base UI popups (dialogs, menus) always
+     render above page content regardless of in-app z-index values. */
+  #root {
+    isolation: isolate;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.lenis) {
+      scroll-behavior: smooth;
+    }
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility text-gold-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    var(--gold) 35%,
+    var(--gold-soft) 55%,
+    var(--gold) 75%,
+    var(--gold-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold-sheen {
+  background: linear-gradient(
+    120deg,
+    var(--gold-deep) 0%,
+    var(--gold) 40%,
+    var(--gold-soft) 55%,
+    var(--gold) 70%,
+    var(--gold-deep) 100%
+  );
+}
+
+@utility grain {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    oklch(1 0 0 / 0.05) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
