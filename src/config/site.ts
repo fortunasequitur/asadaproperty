@@ -8,6 +8,7 @@
 
 export const site: Record<
   | "name"
+  | "siteUrl"
   | "tagline"
   | "city"
   | "developerName"
@@ -24,6 +25,11 @@ export const site: Record<
   string
 > = {
   name: "Villa Puncak Annisa",
+  /**
+   * URL produksi tanpa "/" di akhir. Dipakai saat build untuk og:image,
+   * og:url, canonical & JSON-LD di index.html (token __SITE_URL__).
+   */
+  siteUrl: "https://villa-puncak-annisa-devtool-2.viktor.space",
   tagline: "Rumah Mewah Nuansa Villa di Kawasan Kota Malang",
   city: "Kota Malang",
 

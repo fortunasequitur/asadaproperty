@@ -4,6 +4,7 @@ import path from "path";
 import { defineConfig, loadEnv } from "vite";
 import { buildInputsStampPlugin } from "./scripts/build-inputs.ts";
 import { preloadLandingPlugin } from "./scripts/preload-landing.ts";
+import { site } from "./src/config/site.ts";
 import {
   builtAccessModePlugin,
   describeOverrides,
@@ -27,6 +28,14 @@ export default defineConfig(({ mode }) => {
       buildInputsStampPlugin(root),
       builtAccessModePlugin(root),
       preloadLandingPlugin(root),
+      {
+        // Absolute URLs for og:image / canonical / JSON-LD come from site.ts.
+        name: "site-url",
+        transformIndexHtml: {
+          order: "pre",
+          handler: html => html.replaceAll("__SITE_URL__", site.siteUrl),
+        },
+      },
     ],
     resolve: {
       alias: {
