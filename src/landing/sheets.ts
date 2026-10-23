@@ -6,7 +6,7 @@ import type { Attribution } from "./tracking";
  * Validasi, anti-dobel & limit kiriman ada di Apps Script-nya.
  */
 export const SHEETS_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycby2SAWxcnBEXvY9X-j9lEDyytNAgO_sXBSY-10oIDfyflofszu8DDL0EfBqNVXYMHrB/exec";
+  "https://script.google.com/macros/s/AKfycbx3iodVibJ8-xslZZGKPwy7aafeOsjOgwgFPNyGED1tj3aNuPth6W3Dj4my0c7h8ul5/exec";
 
 /** Penanda sederhana: kiriman tanpa ini ditolak Apps Script. */
 const SHEETS_KEY = "vpa-lead-v1";
