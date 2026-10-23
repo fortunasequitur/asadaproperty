@@ -69,8 +69,8 @@ export const site: Record<
   /** TODO: harga mulai, contoh "Rp 4xx jutaan". Kosong = "Harga via form". */
   priceFrom: "",
 
-  /** TODO: Meta (Facebook) Pixel ID, contoh "123456789012345". */
-  metaPixelId: "",
+  /** Meta (Facebook) Pixel ID — ASADA PROPERTY. */
+  metaPixelId: "2009831413032140",
 
   /** TODO: Google tag ID (GA4 "G-XXXX" atau Google Ads "AW-XXXX"). */
   googleTagId: "",
