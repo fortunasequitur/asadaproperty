@@ -38,11 +38,12 @@ export const gallery: GalleryImage[] = [
   },
   {
     id: "denah",
-    src: "/img/denah-605.webp",
-    alt: "Denah rumah lantai 1 dan lantai 2",
+    src: "/img/denah-1200.webp",
+    srcSet: "/img/denah-800.webp 800w, /img/denah-1200.webp 1200w",
+    alt: "Denah rumah lantai 1 dan lantai 2 (lebar 6 m, skala 1:100)",
     caption: "Denah LT1 & LT2 (ilustrasi brosur)",
-    width: 605,
-    height: 555,
+    width: 1200,
+    height: 1106,
     plan: true,
   },
 ];
