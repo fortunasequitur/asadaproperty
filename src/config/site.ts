@@ -30,7 +30,7 @@ export const site: Record<
    * URL produksi tanpa "/" di akhir. Dipakai saat build untuk og:image,
    * og:url, canonical & JSON-LD di index.html (token __SITE_URL__).
    */
-  siteUrl: "https://villa-puncak-annisa-devtool-2.viktor.space",
+  siteUrl: "https://asadaproperty.com",
   /**
    * Backend Convex produksi. Dipakai otomatis kalau env VITE_CONVEX_URL
    * tidak di-set saat build (mis. hosting di Vercel). URL publik, bukan rahasia.
