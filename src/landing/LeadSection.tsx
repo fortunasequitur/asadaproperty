@@ -20,7 +20,12 @@ import {
 } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { api } from "../../convex/_generated/api";
-import { normalizeIndoPhone, validateName } from "../../convex/leadRules";
+import {
+  cleanName,
+  normalizeIndoPhone,
+  validateName,
+} from "../../convex/leadRules";
+import { sendLeadToSheet } from "./sheets";
 import { getAttribution, getClientId, trackLead } from "./tracking";
 import { Eyebrow, GoldButton, MountainMark, WhatsAppIcon } from "./ui";
 
@@ -215,7 +220,8 @@ export function LeadForm() {
     setBusy(true);
     try {
       const a = getAttribution();
-      await submit({
+      const clientId = getClientId();
+      const res = await submit({
         name,
         phone,
         city: city || undefined,
@@ -225,10 +231,28 @@ export function LeadForm() {
         website: website || undefined,
         ...a,
         userAgent: navigator.userAgent.slice(0, 400),
-        clientId: getClientId(),
+        clientId,
       });
       const unitLabel = unitTypes.find(u => u.id === unit)!.label;
       trackLead(unitLabel);
+      if (!website && !res.duplicate) {
+        sendLeadToSheet({
+          name: cleanName(name),
+          phone: normalizeIndoPhone(phone) ?? phone,
+          city: city.trim(),
+          paymentPlan: paymentPlans.find(p => p.id === plan)!.label,
+          unitType: unitLabel,
+          wantsSurvey: survey,
+          utmSource: a.utmSource,
+          utmMedium: a.utmMedium,
+          utmCampaign: a.utmCampaign,
+          utmContent: a.utmContent,
+          fbclid: a.fbclid,
+          gclid: a.gclid,
+          landingUrl: a.landingUrl,
+          clientId,
+        });
+      }
       setDone({ name: name.replace(/\s+/g, " ").trim(), unitLabel });
     } catch (err) {
       const msg =
