@@ -5,7 +5,8 @@ import type { Attribution } from "./tracking";
  * Kosong = lead tidak dikirim ke Google Sheet (database tetap jalan).
  * Validasi, anti-dobel & limit kiriman ada di Apps Script-nya.
  */
-export const SHEETS_WEBHOOK_URL = "";
+export const SHEETS_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycby2SAWxcnBEXvY9X-j9lEDyytNAgO_sXBSY-10oIDfyflofszu8DDL0EfBqNVXYMHrB/exec";
 
 /** Penanda sederhana: kiriman tanpa ini ditolak Apps Script. */
 const SHEETS_KEY = "vpa-lead-v1";
